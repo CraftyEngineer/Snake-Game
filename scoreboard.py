@@ -9,18 +9,25 @@ class Score(Turtle):
         super().__init__()
         self.pu()
         self.score_counter=SCORE
+        self.high_score=0
         self.color("white")
         self.goto(SCOREBOARD_XCOR,SCOREBOARD_YCOR)
         self.hideturtle()
-        self.write(arg=f"Score: {self.score_counter} ", move=False, align=ALIGN, font=FONT)
+        self.write(arg=f"Score: {self.score_counter} HIGH SCORE: {self.high_score}", move=False, align=ALIGN, font=FONT)
         
     
     def update_score(self):
         self.clear()
+        
+        self.write(arg=f"SCORE: {self.score_counter} HIGH SCORE: {self.high_score} ", move=False, align=ALIGN, font=FONT)
         self.score_counter+=1
-        self.write(arg=f"Score: {self.score_counter} ", move=False, align=ALIGN, font=FONT)
 
-    def game_over(self):
-        self.home()
-        self.write(arg=f"GAME OVER!", move=False, align=ALIGN, font=('Arial', 30, 'bold'))
+    def reset(self):
+        if self.score_counter > self.high_score:
+            self.high_score=self.score_counter
+        self.score_counter=0
+        self.update_score()
+
+    
+
         

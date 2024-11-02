@@ -18,8 +18,9 @@ display.onkeypress(snake.move_right, "d")
 display.onkeypress(snake.move_left, "a")
 display.onkeypress(snake.move_down, "s")
 while is_game_on:
-    if snake.head.xcor() > 275 or snake.head.xcor() < -275 or snake.head.ycor() > 270 or snake.head.ycor() < -270:
-        is_game_on = False
+    if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
+        score.reset()
+        snake.reset()
     display.update()
     time.sleep(0.1)
     snake.move_snake()
@@ -30,7 +31,8 @@ while is_game_on:
         score.update_score()
     for seg in snake.segments[1:]:
         if snake.head.distance(seg) < 10:
-            is_game_on = False
+            score.reset()
+            snake.reset()
 
 score.game_over()
 display.exitonclick()
