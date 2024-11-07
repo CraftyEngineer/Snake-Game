@@ -9,24 +9,30 @@ class Score(Turtle):
         super().__init__()
         self.pu()
         self.score_counter=SCORE
-        self.high_score=0
+        with open("Snake Game/data.txt") as data:
+            self.high_score=int(data.read())
+
         self.color("white")
         self.goto(SCOREBOARD_XCOR,SCOREBOARD_YCOR)
         self.hideturtle()
-        self.write(arg=f"Score: {self.score_counter} HIGH SCORE: {self.high_score}", move=False, align=ALIGN, font=FONT)
+        self.write(arg=f"SCORE: {self.score_counter} HIGH SCORE: {self.high_score}", move=False, align=ALIGN, font=FONT)
         
     
     def update_score(self):
         self.clear()
-        
-        self.write(arg=f"SCORE: {self.score_counter} HIGH SCORE: {self.high_score} ", move=False, align=ALIGN, font=FONT)
         self.score_counter+=1
+        self.write(arg=f"SCORE: {self.score_counter} HIGH SCORE: {self.high_score} ", move=False, align=ALIGN, font=FONT)
+        
 
     def reset(self):
         if self.score_counter > self.high_score:
             self.high_score=self.score_counter
+            with open("Snake Game/data.txt", mode='w') as data:
+                data.write(f"{self.high_score}")
         self.score_counter=0
         self.update_score()
+
+
 
     
 
